@@ -23,7 +23,7 @@ class _MyApp extends State<MyApp> {
           child: new Icon(Icons.add),
           onPressed: () {
             setState(() {
-              var data =  EasyLocalizationProvider.of(context).data;
+              var data = EasyLocalizationProvider.of(context).data;
               if (Localizations.localeOf(context).languageCode == "ar")
                 data.changeLocale(Locale("en", "US"));
               else
@@ -61,86 +61,3 @@ class MyApptest extends StatelessWidget {
     );
   }
 }
-
-// class MyHomePage extends StatefulWidget {
-//   MyHomePage({Key key, this.title}) : super(key: key);
-
-//   final String title;
-
-//   @override
-//   _MyHomePageState createState() => _MyHomePageState();
-// }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   int counter = 0;
-//   incrementCounter() {
-//     print(Localizations.localeOf(context).languageCode);
-
-//     setState(() {
-//       counter++;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     var data = EasyLocalizationProvider.of(context).data;
-//     return EasyLocalizationProvider(
-//       data: data,
-//       child: Scaffold(
-//         appBar: AppBar(
-//           title: Text(AppLocalizations.of(context).tr('title')),
-//           actions: <Widget>[
-//             FlatButton(
-//               child: Text("English"),
-//               color: Localizations.localeOf(context).languageCode == "en"
-//                   ? Colors.lightBlueAccent
-//                   : Colors.blue,
-//               onPressed: () {
-//                 this.setState(() {
-//                   data.changeLocale(Locale("en", "US"));
-//                   print(Localizations.localeOf(context).languageCode);
-//                 });
-//               },
-//             ),
-//             FlatButton(
-//               child: Text("عربي"),
-//               color: Localizations.localeOf(context).languageCode == "ar"
-//                   ? Colors.lightBlueAccent
-//                   : Colors.blue,
-//               onPressed: () {
-//                 this.setState(() {
-//                   data.changeLocale(Locale("ar", "DZ"));
-
-//                   print(Localizations.localeOf(context).languageCode);
-//                 });
-//               },
-//             )
-//           ],
-//         ),
-//         body: Center(
-//           child: new Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: <Widget>[
-//               new Text(AppLocalizations.of(context)
-//                   .tr('msg', args: ['aissat', 'Flutter'])),
-//               new Text(AppLocalizations.of(context).plural('clicked', counter)),
-//               new FlatButton(
-//                 onPressed: () async {
-//                   incrementCounter();
-//                 },
-//                 child: new Text(AppLocalizations.of(context).tr('clickMe')),
-//               ),
-//               new Text(
-//                 AppLocalizations.of(context).tr('profile.reset_password.title'),
-//               ),
-//             ],
-//           ),
-//         ),
-//         floatingActionButton: FloatingActionButton(
-//           onPressed: incrementCounter,
-//           child: Text('+1'),
-//         ),
-//       ),
-//     );
-//   }
-// }
