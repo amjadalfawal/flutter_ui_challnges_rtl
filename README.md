@@ -1,4 +1,4 @@
-# my_app
+# Flutter_ui_challnges_rtl
 
 A new Flutter project.
 
