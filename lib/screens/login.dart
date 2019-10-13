@@ -8,7 +8,6 @@ import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:my_app/services/navigation_service.dart';
 import '../locator.dart';
 import './assets/assets.dart';
-import './signup.dart';
 import './helpers/validateors.dart';
 import './assets/network_image.dart';
 import 'package:my_app/constant/route_paths.dart' as routes;
@@ -20,6 +19,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPage extends State<LoginPage> {
   final _email = TextEditingController();
+    final NavigationService _navigationService = locator<NavigationService>();
+
   var errMsg;
   @override
   void dispose() {
@@ -50,10 +51,7 @@ class _LoginPage extends State<LoginPage> {
             children: <Widget>[
               FlatButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => SignupOnePage()));
+                  _navigationService.navigateTo(routes.SingUp, arguments: '\nFilledStacks');
                 },
                 child: Text("Sign Up",
                     style: TextStyle(color: Colors.blue, fontSize: 18.0)),
@@ -66,7 +64,6 @@ class _LoginPage extends State<LoginPage> {
   }
 
   Container _buildLoginForm() {
-  final NavigationService _navigationService = locator<NavigationService>();
 
         return Container(
           padding: EdgeInsets.all(20.0),

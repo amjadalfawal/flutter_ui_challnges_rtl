@@ -4,6 +4,8 @@
   */
 
 import 'package:flutter/material.dart';
+import 'package:my_app/services/navigation_service.dart';
+import '../../locator.dart';
 import './animation1.dart';
 
 import './oval-right-clipper.dart';
@@ -12,6 +14,8 @@ import './oval-left-clipper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class DarkDrawerPage extends StatelessWidget {
+    final NavigationService _navigationService = locator<NavigationService>();
+
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   final Color primary = Color(0xff291747);
   final Color active = Color(0xffffffff);
@@ -90,7 +94,9 @@ class DarkDrawerPage extends StatelessWidget {
                           Icons.power_settings_new,
                           color: active,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                            _navigationService.navigateTo('Login');
+                        },
                       ),
                     ),
                     Container(
