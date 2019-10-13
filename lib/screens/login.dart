@@ -5,18 +5,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:my_app/services/navigation_service.dart';
+import '../locator.dart';
 import './assets/assets.dart';
 import './signup.dart';
 import './helpers/validateors.dart';
 import './assets/network_image.dart';
-import './navigation/drawer1.dart';
+import 'package:my_app/constant/route_paths.dart' as routes;
 
-class LoginTowPage extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   @override
-  _LoginTwoPage createState() => _LoginTwoPage();
+  _LoginPage createState() => _LoginPage();
 }
 
-class _LoginTwoPage extends State<LoginTowPage> {
+class _LoginPage extends State<LoginPage> {
   final _email = TextEditingController();
   var errMsg;
   @override
@@ -64,6 +66,7 @@ class _LoginTwoPage extends State<LoginTowPage> {
   }
 
   Container _buildLoginForm() {
+  final NavigationService _navigationService = locator<NavigationService>();
 
         return Container(
           padding: EdgeInsets.all(20.0),
@@ -169,11 +172,13 @@ class _LoginTwoPage extends State<LoginTowPage> {
                     //todo http request login amjad 
                   });
                      if (errMsg == null){
-                      Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => DarkDrawerPage()));
-                    }
+                    //   Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (BuildContext context) => DarkDrawerPage()));
+                          _navigationService.navigateTo(routes.HomeRoute, arguments: '\nFilledStacks');
+
+                     }
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40.0)),

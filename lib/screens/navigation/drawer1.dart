@@ -5,14 +5,16 @@
 
 import 'package:flutter/material.dart';
 import './animation1.dart';
+
 import './oval-right-clipper.dart';
+import './oval-left-clipper.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 
 class DarkDrawerPage extends StatelessWidget {
-  static final String path = "lib/src/pages/navigation/drawer1.dart";
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   final Color primary = Color(0xff291747);
-  final Color active = Color(0xff6C48AB);
+  final Color active = Color(0xffffffff);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class DarkDrawerPage extends StatelessWidget {
       key: _key,
       appBar: AppBar(
         title: Text('Dark Drawer Navigation'),
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         leading: IconButton(
           icon: Icon(Icons.menu),
           onPressed: () {
@@ -28,7 +30,7 @@ class DarkDrawerPage extends StatelessWidget {
           },
         ),
       ),
-      drawer: _buildDrawer(),
+      drawer: _buildDrawer(context),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -62,63 +64,69 @@ class DarkDrawerPage extends StatelessWidget {
     );
   }
 
-  _buildDrawer() {
+  _buildDrawer(BuildContext context) {
     final String image = images[0];
     return ClipPath(
-      clipper: OvalRightBorderClipper(),
-      child: Drawer(
-        child: Container(
-          padding: const EdgeInsets.only(left: 16.0, right: 40),
-          decoration: BoxDecoration(
-              color: primary, boxShadow: [BoxShadow(color: Colors.black45)]),
-          width: 300,
-          child: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.power_settings_new,
-                        color: active,
+      clipper: Localizations.localeOf(context).languageCode == 'ar'
+          ? OvalLeftBorderClipper()
+          : OvalRightBorderClipper(),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.52, //20.0,
+
+        child: Drawer(
+          child: Container(
+            padding: const EdgeInsets.only(left: 16.0, right: 40),
+            decoration: BoxDecoration(
+                color: primary, boxShadow: [BoxShadow(color: Colors.black45)]),
+            width: 300,
+            child: SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.power_settings_new,
+                          color: active,
+                        ),
+                        onPressed: () {},
                       ),
-                      onPressed: () {},
                     ),
-                  ),
-                  Container(
-                    height: 90,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                            colors: [Colors.pink, Colors.deepPurple])),
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: CachedNetworkImageProvider(image),
+                    Container(
+                      height: 90,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                              colors: [Colors.pink, Colors.deepPurple])),
+                      child: CircleAvatar(
+                        radius: 40,
+                        backgroundImage: CachedNetworkImageProvider(image),
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 5.0),
-                  Text(
-                    "erika costell",
-                    style: TextStyle(color: Colors.white, fontSize: 18.0),
-                  ),
-                  Text(
-                    "@erika07",
-                    style: TextStyle(color: active, fontSize: 16.0),
-                  ),
-                  SizedBox(height: 30.0),
-                  _buildRow(Icons.home, "Home"),
-                  _buildDivider(),
-                  _buildRow(Icons.person_pin, "Your profile"),
-                  _buildDivider(),
-                  _buildRow(Icons.settings, "Settings"),
-                  _buildDivider(),
-                  _buildRow(Icons.email, "Contact us"),
-                  _buildDivider(),
-                  _buildRow(Icons.info_outline, "Help"),
-                  _buildDivider(),
-                ],
+                    SizedBox(height: 5.0),
+                    Text(
+                      "erika costell",
+                      style: TextStyle(color: Colors.white, fontSize: 18.0),
+                    ),
+                    Text(
+                      "@erika07",
+                      style: TextStyle(color: active, fontSize: 16.0),
+                    ),
+                    SizedBox(height: 30.0),
+                    _buildRow(Icons.home, "Home"),
+                    _buildDivider(),
+                    _buildRow(Icons.person_pin, "Your profile"),
+                    _buildDivider(),
+                    _buildRow(Icons.email, "Contact us"),
+                    _buildDivider(),
+                    _buildRow(Icons.info_outline, "Help"),
+                    _buildDivider(),
+                    _buildRow(Icons.settings, "Settings"),
+                    _buildDivider(),
+                  ],
+                ),
               ),
             ),
           ),

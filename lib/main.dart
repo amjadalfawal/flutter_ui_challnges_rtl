@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:my_app/services/navigation_service.dart';
+import 'locator.dart';
 import 'screens/login.dart';
+import  './constant/route_paths.dart' as routes;
+import './Router.dart' as router;
 
-void main() => runApp(MaterialApp(home: EasyLocalization(child: MyApptest())));
+void main() {
+  setupLocator();
+  runApp(MaterialApp(home: EasyLocalization(child: MyApptest())));
+}
 
 class MyApp extends StatefulWidget {
   MyApp({Key key}) : super(key: key);
@@ -17,7 +24,7 @@ class _MyApp extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Stack(children: <Widget>[
-      LoginTowPage(),
+      LoginPage(),
       new Positioned(
         child: new FloatingActionButton(
           child: new Icon(Icons.add),
@@ -56,7 +63,11 @@ class MyApptest extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
+        
         home: MyApp(),
+        navigatorKey: locator<NavigationService>().navigatorKey,
+        onGenerateRoute: router.generateRoute,
+        initialRoute: routes.LoginRoute,
       ),
     );
   }

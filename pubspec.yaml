@@ -31,6 +31,8 @@ dependencies:
   flutter_custom_clippers: ^0.1.1
   cached_network_image: ^1.1.1
   flutter_swiper: ^1.1.4
+  get_it:
+  provider:
 
 
 dev_dependencies:
