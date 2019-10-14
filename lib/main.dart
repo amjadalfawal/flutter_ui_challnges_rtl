@@ -67,7 +67,7 @@ class MyApptest extends StatelessWidget {
         home: MyApp(),
         navigatorKey: locator<NavigationService>().navigatorKey,
         onGenerateRoute: router.generateRoute,
-        initialRoute: routes.SingUp,
+        initialRoute: routes.LoginRoute,
       ),
     );
   }

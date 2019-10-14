@@ -14,8 +14,7 @@ import './oval-left-clipper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class DarkDrawerPage extends StatelessWidget {
-    final NavigationService _navigationService = locator<NavigationService>();
-
+  final NavigationService _navigationService = locator<NavigationService>();
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   final Color primary = Color(0xff291747);
   final Color active = Color(0xffffffff);
@@ -34,7 +33,7 @@ class DarkDrawerPage extends StatelessWidget {
           },
         ),
       ),
-      drawer: _buildDrawer(context),
+      drawer: buildDrawer(context),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -68,7 +67,7 @@ class DarkDrawerPage extends StatelessWidget {
     );
   }
 
-  _buildDrawer(BuildContext context) {
+ dynamic buildDrawer(BuildContext context) {
     final String image = images[0];
     return ClipPath(
       clipper: Localizations.localeOf(context).languageCode == 'ar'
@@ -95,7 +94,7 @@ class DarkDrawerPage extends StatelessWidget {
                           color: active,
                         ),
                         onPressed: () {
-                            _navigationService.navigateTo('Login');
+                          _navigationService.navigateTo('Login');
                         },
                       ),
                     ),
@@ -123,7 +122,12 @@ class DarkDrawerPage extends StatelessWidget {
                     SizedBox(height: 30.0),
                     _buildRow(Icons.home, "Home"),
                     _buildDivider(),
-                    _buildRow(Icons.person_pin, "Your profile"),
+                    GestureDetector(
+                      onTap: () {
+                          _navigationService.navigateTo('Prfoile');
+                      },
+                      child: _buildRow(Icons.person_pin, "Your profile"),
+                    ),
                     _buildDivider(),
                     _buildRow(Icons.email, "Contact us"),
                     _buildDivider(),

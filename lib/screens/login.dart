@@ -196,6 +196,19 @@ class _LoginPage extends State<LoginPage> {
      
        Scaffold(
           body: _buildPageContent(context),
-        );
+          floatingActionButton:      
+         new FloatingActionButton(
+          child: new Icon(Icons.add),
+          onPressed: () {
+            setState(() {
+              var data = EasyLocalizationProvider.of(context).data;
+              if (Localizations.localeOf(context).languageCode == "ar")
+                data.changeLocale(Locale("en", "US"));
+              else
+                data.changeLocale(Locale("ar", "DZ"));
+            });
+          },
+        ));
+        
   }
 }
