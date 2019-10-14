@@ -10,7 +10,7 @@ import './animation1.dart';
 
 import './oval-right-clipper.dart';
 import './oval-left-clipper.dart';
-
+import '../../screens/feed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class DarkDrawerPage extends StatelessWidget {
@@ -34,36 +34,7 @@ class DarkDrawerPage extends StatelessWidget {
         ),
       ),
       drawer: buildDrawer(context),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 200,
-              decoration: BoxDecoration(
-                  color: Colors.deepOrange,
-                  borderRadius: BorderRadius.circular(10.0)),
-            ),
-            SizedBox(height: 10.0),
-            Container(
-              width: double.infinity,
-              height: 200,
-              decoration: BoxDecoration(
-                  color: Colors.lightGreen,
-                  borderRadius: BorderRadius.circular(10.0)),
-            ),
-            SizedBox(height: 10.0),
-            Container(
-              width: double.infinity,
-              height: 200,
-              decoration: BoxDecoration(
-                  color: Colors.pink,
-                  borderRadius: BorderRadius.circular(10.0)),
-            ),
-          ],
-        ),
-      ),
+      body:HomePage(),
     );
   }
 

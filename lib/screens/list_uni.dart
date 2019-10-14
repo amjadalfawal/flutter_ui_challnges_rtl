@@ -5,6 +5,7 @@ import './navigation/drawer1.dart' as drawer;
 
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class SchoolList extends StatefulWidget {
   SchoolList({Key key}) : super(key: key);
@@ -18,7 +19,6 @@ class _SchoolListState extends State<SchoolList> {
 
   final primary = Color(0xff696b9e);
   final secondary = Color(0xfff29a94);
-
 
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
@@ -74,12 +74,39 @@ class _SchoolListState extends State<SchoolList> {
     },
     {
       "name": "Campare Handeson",
-      "location": "Kasai Pantan NY, 12483",
+      "location":
+          "Kasai Pantan NY, 12483Kasai Pantan NY, 12483Kasai Pantan NY, 12483Kasai Pantan NY, 12483 Kasai Pantan NY, 12483Kasai Pantan NY, 12483",
       "type": "Lower Secondary School",
       "logoText":
           "https://cdn.pixabay.com/photo/2017/01/13/01/22/rocket-1976107_960_720.png"
     },
   ];
+  bool selected = false;
+  int slectedIndex;
+  void select(int index) {
+    //case one intial
+    if (!selected) {
+      selected = true;
+      slectedIndex = index;
+      print('selcted case 1');
+    }
+    //case tow slected already
+    else if (selected && slectedIndex == index) {
+      selected = false;
+      slectedIndex = -1;
+      print('selcted case 2');
+    }
+    //case three
+    else {
+      selected = true;
+      slectedIndex = index;
+      print('selcted case 3');
+    }
+    setState(() {
+      slectedIndex = slectedIndex;
+      selected = selected;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +127,10 @@ class _SchoolListState extends State<SchoolList> {
                 child: ListView.builder(
                     itemCount: schoolLists.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return buildList(context, index);
+                      if (index == slectedIndex && selected)
+                        return buildList(context, index, true);
+                      else
+                        return buildList(context, index, false);
                     }),
               ),
               Container(
@@ -181,88 +211,100 @@ class _SchoolListState extends State<SchoolList> {
     );
   }
 
-  Widget buildList(BuildContext context, int index) {
+  Widget buildList(BuildContext context, int index, bool selected) {
     var lang = Localizations.localeOf(context).languageCode;
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        color: Colors.white,
-      ),
-      width: double.infinity,
-      height: 110,
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      alignment: Alignment.center,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            width: 75,
-            height: 75,
-            margin: lang == "ar"
-                ? EdgeInsets.only(left: 20)
-                : EdgeInsets.only(right: 20),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              border: Border.all(width: 3, color: secondary),
-              image: DecorationImage(
-                  image: CachedNetworkImageProvider(
-                      schoolLists[index]['logoText']),
-                  fit: BoxFit.fill),
+    return new GestureDetector(
+      onTap: () {
+        select(index);
+      },
+      child: Container(
+        decoration: selected == true
+            ? new BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                color: Colors.black12,
+                border: new Border.all(color: Colors.black26))
+            : BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                color: Colors.white,
+              ),
+        width: double.infinity,
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        alignment: Alignment.center,
+        child: Row(
+          children: <Widget>[
+            Container(
+              width: 75,
+              height: 75,
+              margin: lang == "ar"
+                  ? EdgeInsets.only(left: 20)
+                  : EdgeInsets.only(right: 20),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                border: Border.all(width: 3, color: secondary),
+                image: DecorationImage(
+                    image: CachedNetworkImageProvider(
+                        schoolLists[index]['logoText']),
+                    fit: BoxFit.fill),
+              ),
             ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  schoolLists[index]['name'],
-                  style: TextStyle(
-                      color: primary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
-                ),
-                SizedBox(
-                  height: 6,
-                ),
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.location_on,
-                      color: secondary,
-                      size: 20,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(schoolLists[index]['location'],
-                        style: TextStyle(
-                            color: primary, fontSize: 13, letterSpacing: .3)),
-                  ],
-                ),
-                SizedBox(
-                  height: 6,
-                ),
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.school,
-                      color: secondary,
-                      size: 20,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(schoolLists[index]['type'],
-                        style: TextStyle(
-                            color: primary, fontSize: 13, letterSpacing: .3)),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  AutoSizeText(
+                    schoolLists[index]['name'],
+                    style: TextStyle(
+                        color: primary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  Wrap(
+                    children: <Widget>[
+                      Icon(
+                        Icons.location_on,
+                        color: secondary,
+                        size: 20,
+                      ),
+                      SizedBox(
+                          width: 150,
+                          child: AutoSizeText(schoolLists[index]['location'],
+                              maxLines: 50,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: primary,
+                                  fontSize: 13,
+                                  letterSpacing: .3))),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.school,
+                        color: secondary,
+                        size: 20,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      AutoSizeText(schoolLists[index]['type'],
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: primary, fontSize: 13, letterSpacing: .3)),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
