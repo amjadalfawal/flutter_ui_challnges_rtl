@@ -6,6 +6,7 @@ import './navigation/drawer1.dart' as drawer;
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import '../constant/size.dart';
 
 class SchoolList extends StatefulWidget {
   SchoolList({Key key}) : super(key: key);
@@ -213,20 +214,21 @@ class _SchoolListState extends State<SchoolList> {
 
   Widget buildList(BuildContext context, int index, bool selected) {
     var lang = Localizations.localeOf(context).languageCode;
-    return new GestureDetector(
-      onTap: () {
-        select(index);
-      },
-      child: Container(
-        decoration: selected == true
-            ? new BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: Colors.black12,
-                border: new Border.all(color: Colors.black26))
-            : BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: Colors.white,
-              ),
+        return new GestureDetector(
+          onTap: () {
+            select(index);
+          },
+          child: Container(
+            decoration: selected == true
+                ? new BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: Colors.black12,
+                    border: new Border.all(color: Colors.black26))
+                : BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: Colors.white,
+                  ),
+           
         width: double.infinity,
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),

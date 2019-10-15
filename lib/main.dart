@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:my_app/services/navigation_service.dart';
+import 'constant/size.dart';
 import 'locator.dart';
 import 'screens/login.dart';
-import  './constant/route_paths.dart' as routes;
+import './constant/route_paths.dart' as routes;
 import './Router.dart' as router;
 
 void main() {
   setupLocator();
+
   runApp(MaterialApp(home: EasyLocalization(child: MyApptest())));
 }
 
@@ -23,6 +25,7 @@ class _MyApp extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     return Stack(children: <Widget>[
       LoginPage(),
       new Positioned(
@@ -47,8 +50,10 @@ class _MyApp extends State<MyApp> {
 }
 
 class MyApptest extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
+
     var data = EasyLocalizationProvider.of(context).data;
     return EasyLocalizationProvider(
       data: data,
@@ -63,7 +68,6 @@ class MyApptest extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        
         home: MyApp(),
         navigatorKey: locator<NavigationService>().navigatorKey,
         onGenerateRoute: router.generateRoute,

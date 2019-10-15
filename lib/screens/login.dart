@@ -5,6 +5,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:my_app/constant/size.dart';
 import 'package:my_app/services/navigation_service.dart';
 import '../locator.dart';
 import './assets/assets.dart';
@@ -30,6 +31,8 @@ class _LoginPage extends State<LoginPage> {
   }
 
   Widget _buildPageContent(BuildContext context) {
+           
+
     return Container(
       color: Colors.blue.shade100,
       child: ListView(
@@ -191,7 +194,7 @@ class _LoginPage extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    //data.changeLocale(Locale("ar", "DZ"));
+ SizeConfig.init(context);
     return 
      
        Scaffold(
