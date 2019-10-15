@@ -4,6 +4,7 @@ import 'package:my_app/services/navigation_service.dart';
 import '../locator.dart';
 import './assets/assets.dart';
 import '../screens/assets/network_image.dart';
+import './navigation/drawer1.dart';
 
 class ProfileSevenPage extends StatelessWidget {
   final NavigationService _navigationService = locator<NavigationService>();
@@ -12,16 +13,32 @@ class ProfileSevenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-          var lang = Localizations.localeOf(context).languageCode;
-
+    var lang = Localizations.localeOf(context).languageCode;
+    final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           mini: true,
-          child: lang == 'ar' ?  Icon(  Platform.isIOS ? Icons.arrow_forward_ios : Icons.arrow_forward) : Icon(  Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
+          child: lang == 'ar'
+              ? Icon(Platform.isIOS
+                  ? Icons.arrow_forward_ios
+                  : Icons.arrow_forward)
+              : Icon(Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
+        key: _key,
+        appBar: AppBar(
+          title: Text('Dark Drawer Navigation'),
+          automaticallyImplyLeading: true,
+          leading: IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              _key.currentState.openDrawer();
+            },
+          ),
+        ),
+        drawer: DarkDrawerPage().buildDrawer(context),
         backgroundColor: Color.fromRGBO(255, 255, 255, .9),
         body: SafeArea(
           child: ListView(
@@ -30,7 +47,7 @@ class ProfileSevenPage extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     width: double.infinity,
-                    height: 330,
+                    height: 400,
                     color: primary,
                   ),
                   Positioned(
