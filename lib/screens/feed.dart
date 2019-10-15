@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     SizedBox(height: SizeConfig.blockSizeHorizontal * 3),
                     Container(
-                      height: 180,
+                      height: 225,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: <Widget>[
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget makeStory({storyImage, userImage, userName}) {
     return AspectRatio(
-      aspectRatio: 1.57 / 2,
+      aspectRatio: 2 / 3.5,
       child: Container(
         margin: EdgeInsets.only(right: SizeConfig.blockSizeVertical * 1.1),
         decoration: BoxDecoration(
