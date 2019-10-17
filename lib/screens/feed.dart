@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:my_app/services/navigation_service.dart';
+import '../locator.dart';
 import './navigation/animation1.dart';
 import '../constant/size.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import '../constant/route_paths.dart' as routes;
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final String image = images[0];
+    final NavigationService _navigationService = locator<NavigationService>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +54,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(width: SizeConfig.blockSizeVertical * 3),
-                Icon(
-                  Icons.camera_alt,
-                  color: Colors.grey[800],
-                  size: 30,
-                )
+                GestureDetector(
+                  onTap: () {
+                  _navigationService.navigateTo(routes.FrindeList);
+                  },
+                  child: Icon(
+                    Icons.message,
+                    color: Colors.grey[800],
+                    size: 30,
+                  ),
+                ),
               ],
             ),
           ),
@@ -214,7 +223,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(
-                        width: SizeConfig.blockSizeVertical * 50,
+                        width: SizeConfig.blockSizeHorizontal * 50,
                         child: Text(
                           userName,
                           maxLines: 2,
@@ -281,7 +290,13 @@ class _HomePageState extends State<HomePage> {
               Row(
                 children: <Widget>[
                   makeLike(),
-                  Transform.translate(offset: Offset(-5, 0), child: makeLove()),
+                  Transform.translate(
+                      offset: Offset(
+                          Localizations.localeOf(context).languageCode == 'ar'
+                              ? 5
+                              : -5,
+                          0),
+                      child: makeLove()),
                   SizedBox(
                     width: 5,
                   ),
@@ -345,7 +360,7 @@ class _HomePageState extends State<HomePage> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey[200]),
+        border: Border.all(color: Colors.grey[400]),
         borderRadius: BorderRadius.circular(50),
       ),
       child: Center(
